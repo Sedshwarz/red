@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Görsel Oluşturucu</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <div id="bgToggleBtn" class="bg-toggle-btn" title="Arka Planı Değiştir"></div>
+        <div class="controls">
+            <label for="imageInput" class="custom-upload-btn">
+                Add Main
+            </label>
+            <input type="file" id="imageInput" accept="image/*">
+
+            <label for="layerInput" class="custom-upload-btn" id="layerAddBtn"
+                style="display: none; background-color: #17a2b8;">
+                Add Layer
+            </label>
+            <input type="file" id="layerInput" accept="image/*">
+
+            <button id="downloadBtn" class="custom-download-btn" style="display: none;">
+                Download
+            </button>
+        </div>
+
+        <div class="tools-menu" id="toolsMenu" style="display: none;">
+
+            <div class="tool-group" title="Arka Plan Rengi">
+                <input type="color" id="bgColorPicker" value="#333333" class="color-picker">
+            </div>
+
+            <div class="tool-group">
+                <button id="alignLeftBtn" class="tool-btn active" title="Sola Hizala">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="15" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <button id="alignCenterBtn" class="tool-btn" title="Ortaya Hizala">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="7" y1="12" x2="17" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <button id="alignRightBtn" class="tool-btn" title="Sağa Hizala">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="9" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <button id="cropToolBtn" class="tool-btn" title="Zemini Kırp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6.13 1L6 16a2 2 0 0 0 2 2h15"></path>
+                    <path d="M1 6.13L16 6a2 2 0 0 1 2 2v15"></path>
+                </svg>
+                <span id="cropBtnText">Crop</span>
+            </button>
+        </div>
+
+        <div class="layer-style-menu" id="layerStyleMenu" style="opacity: 0; pointer-events: none;">
+            <div class="list-item">
+                <label class="style-item">
+                    <input type="checkbox" id="layerRadius"> Radius
+                </label>
+            </div>
+
+            <div class="list-item">
+                <select id="layerShadow" class="style-select">
+                    <option value="0">No Shadow</option>
+                    <option value="1">Top Left</option>
+                    <option value="2">Top Right</option>
+                    <option value="3">Bottom Right</option>
+                    <option value="4">Bottom Left</option>
+                </select>
+            </div>
+
+            <div class="list-item">
+                <label class="style-item">
+                    <input type="checkbox" id="layerBorder"> Border
+                </label>
+                &nbsp;
+                <input type="color" id="layerBorderColor" value="#ffffff" class="color-picker style-item">
+            </div>
+
+            <div class="list-item style-item rotate-container">
+                <span>Rotate:</span>
+                <input type="range" id="layerRotate" min="-180" max="180" value="0">
+            </div>
+        </div>
+
+        <div class="scale-wrapper">
+            <div class="canvas-area" id="post">
+                <div class="image-container" id="maskContainer">
+                    <img id="previewImage" src="" alt="" style="display: none;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

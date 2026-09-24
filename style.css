@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Jost', sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 0;
+    overflow-x: hidden;
+}
+
+.app-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+
+.controls {
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 15px; 
+    flex-wrap: wrap;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-upload-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ce2727; 
+    color: white;
+    padding: 12px 34px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.custom-upload-btn:active {
+    transform: scale(0.96); 
+    background-color: #a82020;
+}
+
+.custom-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-family: inherit;
+}
+
+.custom-download-btn:active {
+    transform: scale(0.96);
+    background-color: #218838;
+}
+
+
+.scale-wrapper {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    transform: scale(min(1, calc(100vw / 1150))); 
+    transform-origin: top center;
+}
+
+.canvas-area {
+    width: 1100px;
+    height: 550px;
+    background-color: #ce2727;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-shrink: 0;
+    position: relative;
+}
+
+.image-container {
+    width: calc(100% - 100px);
+    height: calc(100% - 100px);
+    background-color: rgba(255, 255, 255, 0.2); 
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: none; 
+}
+
+
+
+.tool-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #007bff; 
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-family: inherit;
+}
+
+.tool-btn:active{
+    transform: scale(0.96);
+    background-color: #0056b3;
+}
+
+.tool-btn.active{
+    background-color: #fd7e14;
+}
+.tool-btn.active:active {
+    background-color: #e86e04;
+}
+
+.image-container img {
+    display: block;
+    max-width: 100%;
+}
+
+
+#previewImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+    z-index: 1; 
+}
+
+.layer-box {
+    position: absolute;
+    touch-action: none;
+    user-select: none;
+    z-index: 10; 
+}
+
+.layer-box.is-edit-mode {
+    border: 2px dashed #007bff;
+    cursor: move;
+}
+
+.layer-box img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+.handle {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #007bff;
+    border: 2px solid white;
+    border-radius: 50%;
+    display: none;
+    z-index: 20;
+}
+
+.layer-box.is-edit-mode .handle {
+    display: block;
+}
+
+.handle.nw { top: -9px; left: -9px; cursor: nwse-resize; }
+.handle.ne { top: -9px; right: -9px; cursor: nesw-resize; }
+.handle.sw { bottom: -9px; left: -9px; cursor: nesw-resize; }
+.handle.se { bottom: -9px; right: -9px; cursor: nwse-resize; }
+
+
+#previewImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+    z-index: 1;
+    transition: left 0.3s ease, right 0.3s ease, transform 0.3s ease;
+}
+
+
+.tool-group {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    border-right: 1px solid #444;
+    padding-right: 15px;
+}
+
+
+.tools-menu{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #444;
+}
+
+.color-picker {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0;
+    background: transparent;
+}
+
+.color-picker::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+.color-picker::-webkit-color-swatch {
+    border: 2px solid #555;
+    border-radius: 6px;
+}
+
+
+
+
+.layer-style-menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.style-item {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+.list-item {
+    padding-right: 10px;
+    border-right: 1px solid #555;
+    height: 40px;
+    display: flex;
+}
+
+.style-select {
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.rotate-container {
+    background: #333;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.rotate-container input[type="range"] {
+    width: 80px;
+    cursor: pointer;
+}
+
+.layer-box img {
+    box-sizing: border-box;
+}
+
+.bg-toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #f99616; 
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s ease;
+}
