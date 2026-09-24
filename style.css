@@ -320,3 +320,25 @@ input[type="file"] {
     border: 2px solid rgba(255, 255, 255, 0.2);
     transition: background-color 0.3s ease;
 }
+
+
+@media (max-width: 1000px) {
+    .scale-wrapper { 
+        transform: scale(0.85);
+    }
+}
+@media (max-width: 940px) {
+    .scale-wrapper { 
+        transform: scale(0.7);
+    }
+}
+@media (max-width: 770px) {
+    .scale-wrapper { 
+        transform: scale(0.5);
+    }
+}
+@media (max-width: 550px) {
+    .scale-wrapper { 
+        transform: scale(0.37);
+    }
+}
